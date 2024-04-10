@@ -12,13 +12,15 @@ services:
   backend:
     build: ./backend
     environment:
-      - DB_URL=postgres://postgres:mysecretpassword@localhost:5522/postgres
+      - DB_URL=postgres://postgres:mysecretpassword@postgres:5432/postgres
       - GLIF_NODE_URL=http://corsproxy:1234/rpc/v0
       - ALLOCATOR_GOVERNANCE_OWNER=$ALLOCATOR_GOVERNANCE_OWNER
       - ALLOCATOR_GOVERNANCE_REPO=$ALLOCATOR_GOVERNANCE_REPO
       - GITHUB_INSTALLATION_ID=$GITHUB_INSTALLATION_ID
       - GITHUB_APP_ID=$GITHUB_APP_ID
       - FILPLUS_ENV=$FILPLUS_ENV
+    ports:
+      - 127.0.0.1:8081:8080
     volumes:
       - ./gh-private-key.pem:/backend/gh-private-key.pem
     depends_on:

@@ -53,5 +53,5 @@ wait $MINER_PID
 kill $DAEMON_PID
 wait
 
-sed -i 's/EnableEthRPC = false/EnableEthRPC = true/' ~/.lotus/config.toml
+sed -i 's/#EnableEthRPC = .*/EnableEthRPC = true/' ~/.lotus/config.toml
 sed -i 's|#ListenAddress = .*|ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"|' ~/.lotus/config.toml
