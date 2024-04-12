@@ -45,43 +45,14 @@ curl localhost:8081/allocators | jq
 
 ## Smart Contract Allocator
 
-First, create a wallet that will own the contract. Store the Private key somewhere safe
-```
-> cast wallet new
-Successfully created new keypair.
-Address:     0x0417721207125493d7A62D854B350b6e5F95d758
-Private key: 0xc7ac1cf979b435c525fe7157cc6080e4dea02dabc624ecd11c4035cfed991f21
-```
+Out of the box there's one Allocator contracts deployed, owned by `0x50c4c4551974c248e8e1c64060c8a3342fdb22d6` (privkey `0x26757a7491f72e1dd8becdc611a87db2f30f0c084155ed9e57ef6737a2026101`) under address `0x640bD4be149f40714D95aBcD414338bc7CfF39a3`, a.k.a. ``, used for Msig Contract Allocator
+  * msig `t01007` has allowance granted out of the box, with following signers:
+    * `t17dx5t567wz5ues2cjkh5mor36nwxysnd5dugpey`
+    * `t1roygqfjkssnfhz3xtfglikg4olckyjrl5ftlqmi`
+    * `t1sqwwp3q537tgztr6maqjabhqyouu7uoycmsts7i`
+    * `t1cbfxphkqhworbuugpkrhayxo2dumf5zjjyy677y`
 
-Next, fund this new wallet. We need to convert it to Filecoin address to do it:
-```
-./tools/lotus.sh evm stat 0x0417721207125493d7A62D854B350b6e5F95d758 | grep Filecoin
-Filecoin address:  t410faqlxeeqhcjkjhv5gfwcuwnilnzpzlv2ye6culqi
-> ./tools/lotus.sh send t410faqlxeeqhcjkjhv5gfwcuwnilnzpzlv2ye6culqi 100
-bafy2bzacedrpakxlfrhtrfjitp7qmynntkzdoa27kog7ds5pswg4r4dtwcdqe
-> ./tools/lotus.sh state wait-msg bafy2bzacedrpakxlfrhtrfjitp7qmynntkzdoa27kog7ds5pswg4r4dtwcdqe
-Executed in tipset: [bafy2bzacecsfkyzg5gyexld66ncevbwnpstzxy4j36wp2lsi5phibmbhouutu]
-Exit Code: 0
-Gas Used: 5711203
-Return:
-```
-
-Now we can use it to deploy the contract. In the [filplus-allocator-contracts](https://github.com/kacperzuk-neti/filplus-allocator-contracts) run the deploy script. Use private key you've generated in the first step:
-```
-forge script script/DeployDevAllocator.s.sol --private-key 0xc7ac1cf979b435c525fe7157cc6080e4dea02dabc624ecd11c4035cfed991f21 --rpc-url http://localhost:1234/rpc/v1 --broadcast 
-```
-
-Get the address with:
-```
-> jq -r '.transactions[] | select( .contractName == "ERC1967Proxy" and .transactionType == "CREATE") | .contractAddress' < broadcast/Deploy.s.sol/31415926/run-latest.json
-0x7eeEE400871CD0Dd5c4080Ad829B96FA5e5debC4
-```
-
-And convert it to Filecoin address for use in other tools:
-```
-./tools/lotus.sh evm stat 0x0417721207125493d7A62D854B350b6e5F95d758 | grep Filecoin
-Filecoin address:  t410fp3xoiaehdtin2xcaqcwyfg4w7jpf326e4fwyrua
-```
+Both are also already made notaries on-chain.
 
 ## Tools
 
