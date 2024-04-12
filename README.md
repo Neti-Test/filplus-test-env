@@ -9,6 +9,7 @@ First configure it:
 And then run it:
 
 ```
+git submodule update --init --recursive
 docker compose up -d
 ```
 

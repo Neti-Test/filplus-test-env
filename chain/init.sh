@@ -19,17 +19,17 @@ VERIFIERS_PRIVKEYS="\
 "
 
 # init and start chain
-./lotus-seed pre-seal --sector-size 2KiB --num-sectors 2
-./lotus-seed genesis new localnet.json
-./lotus-seed genesis set-signers --threshold=2 --signers $RK_addr_1 --signers $RK_addr_2 localnet.json
-./lotus-seed genesis add-miner localnet.json ~/.genesis-sectors/pre-seal-t01000.json
+./lotus-seed --sector-dir=$GENESIS_PATH pre-seal --sector-size 2KiB --num-sectors 2
+./lotus-seed genesis new $GENESIS_PATH/localnet.json
+./lotus-seed genesis set-signers --threshold=2 --signers $RK_addr_1 --signers $RK_addr_2 $GENESIS_PATH/localnet.json
+./lotus-seed genesis add-miner $GENESIS_PATH/localnet.json $GENESIS_PATH/pre-seal-t01000.json
 
-./lotus daemon --lotus-make-genesis=devgen.car --genesis-template=localnet.json --bootstrap=false &>/dev/null &
+./lotus daemon --lotus-make-genesis=$GENESIS_PATH/devgen.car --genesis-template=$GENESIS_PATH/localnet.json --bootstrap=false &>/dev/null &
 DAEMON_PID=$!
 sleep 15
 
-./lotus wallet import --as-default ~/.genesis-sectors/pre-seal-t01000.key
-./lotus-miner init --genesis-miner --actor=t01000 --sector-size=2KiB --pre-sealed-sectors=~/.genesis-sectors --pre-sealed-metadata=~/.genesis-sectors/pre-seal-t01000.json --nosync
+./lotus wallet import --as-default $GENESIS_PATH/pre-seal-t01000.key
+./lotus-miner init --genesis-miner --actor=t01000 --sector-size=2KiB --pre-sealed-sectors=$GENESIS_PATH --pre-sealed-metadata=$GENESIS_PATH/pre-seal-t01000.json --nosync
 ./lotus-miner run --nosync &>/dev/null &
 MINER_PID=$!
 
@@ -53,5 +53,5 @@ wait $MINER_PID
 kill $DAEMON_PID
 wait
 
-sed -i 's/#EnableEthRPC = .*/EnableEthRPC = true/' ~/.lotus/config.toml
-sed -i 's|#ListenAddress = .*|ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"|' ~/.lotus/config.toml
+sed -i 's/#EnableEthRPC = .*/EnableEthRPC = true/' $LOTUS_PATH/config.toml
+sed -i 's|#ListenAddress = .*|ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"|' $LOTUS_PATH/config.toml

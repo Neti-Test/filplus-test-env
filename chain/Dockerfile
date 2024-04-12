@@ -13,14 +13,24 @@ RUN ln -s /usr/local/go/bin/go /usr/local/bin/
 ENV GOROOT=/usr/local/go
 
 # Lotus build
-ENV LOTUS_SKIP_GENESIS_CHECK=_yes_
-RUN git clone https://github.com/filecoin-project/lotus /lotus
+RUN git clone https://github.com/filecoin-project/lotus /lotus -b v1.25.2
 WORKDIR /lotus
-RUN make 2k && ./lotus fetch-params 2048
+RUN env CGO_CFLAGS_ALLOW="-D__BLST_PORTABLE__" CGO_CFLAGS="-D__BLST_PORTABLE__" make 2k && ./lotus fetch-params 2048
 
 # Init
+ENV LOTUS_SKIP_GENESIS_CHECK=_yes_
+ENV LOTUS_PATH=/data/lotus
+ENV LOTUS_MINER_PATH=/data/lotus-miner
+ENV GENESIS_PATH=/data/genesis
+
 ADD init.sh /lotus
 RUN ./init.sh && rm ./init.sh
+
+ADD filplus-allocator-contracts /contracts
+ADD deploy-contracts.sh /lotus
+RUN ./deploy-contracts.sh && rm ./deploy-contracts.sh
+
+VOLUME /data
 
 ADD run.sh ./
 CMD ./run.sh

@@ -1,0 +1,3 @@
+[submodule "chain/filplus-allocator-contracts"]
+	path = chain/filplus-allocator-contracts
+	url = git@github.com:kacperzuk-neti/filplus-allocator-contracts.git

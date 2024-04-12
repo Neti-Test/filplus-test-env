@@ -33,4 +33,3 @@ services:
       - POSTGRES_PASSWORD=mysecretpassword
     volumes:
       - ./backend/dbinit:/docker-entrypoint-initdb.d
-  
