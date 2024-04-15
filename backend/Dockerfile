@@ -6,7 +6,7 @@ RUN apt-get -y update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Lotus build
-RUN git clone https://github.com/kacperzuk-neti/filplus-backend /backend -b smart-contract-allocators-tooling
+RUN git clone https://github.com/kacperzuk-neti/filplus-backend /backend -b neti-internal
 WORKDIR /backend
 RUN cargo build --release
 CMD cargo run --release

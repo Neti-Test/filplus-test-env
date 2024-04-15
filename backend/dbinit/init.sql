@@ -18,3 +18,15 @@ create table if not exists allocators (
 alter table allocators
     add column address text,
     add column tooling text;
+
+create table if not exists applications (
+    id text not null,
+    owner text not null,
+    repo text not null,
+    pr_number bigint not null,
+    application text,
+    updated_at timestamp with time zone not null default current_timestamp,
+    sha text,
+    path text,
+    primary key (id, owner, repo, pr_number)
+);

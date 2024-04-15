@@ -13,10 +13,11 @@ git submodule update --init --recursive
 docker compose up -d
 ```
 
-And populate database with allocators:
+And populate database with allocators & applications:
 
 ```
 ./tools/init-allocators.sh
+./tools/create-application.sh
 ```
 
 ## Recreate from scratch
