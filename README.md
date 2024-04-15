@@ -17,8 +17,15 @@ And populate database with allocators & applications:
 
 ```
 ./tools/init-allocators.sh
-./tools/create-application.sh
 ```
+
+And then:
+
+```
+./tools/create-application.sh ISSUE_NUMBER
+```
+
+where ISSUE_NUMBER is a fresh issue from [bookkeeping repo](https://github.com/Neti-Test/filplus-bookkeeping-msig-contract/issues).
 
 ## Recreate from scratch
 
