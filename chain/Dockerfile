@@ -30,6 +30,9 @@ ADD filplus-allocator-contracts /contracts
 ADD deploy-contracts.sh /lotus
 RUN ./deploy-contracts.sh && rm ./deploy-contracts.sh
 
+RUN git clone https://github.com/kacperzuk-neti/contract-allocator-cli.git /contract-allocator-cli
+RUN cd /contract-allocator-cli && make
+
 VOLUME /data
 
 ADD run.sh ./
