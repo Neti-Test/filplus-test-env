@@ -31,7 +31,7 @@ echo $proxy >> deployed-contracts.txt
 # setup initial allowance for msig
 cd /lotus
 signers="t17dx5t567wz5ues2cjkh5mor36nwxysnd5dugpey t1roygqfjkssnfhz3xtfglikg4olckyjrl5ftlqmi t1sqwwp3q537tgztr6maqjabhqyouu7uoycmsts7i t1cbfxphkqhworbuugpkrhayxo2dumf5zjjyy677y"
-msig_addr=$(./lotus msig create --required 2 --value 1 $signers | grep 'Created new multisig' | awk '{ print $NF }')
+msig_addr=$(./lotus msig create --from t0100 --required 2 --value 1 $signers | grep 'Created new multisig' | awk '{ print $NF }')
 echo $msig_addr > msig-addr.txt
 evm_msig=$(./lotus evm stat $msig_addr | grep 'Eth address' | awk '{ print $NF }')
 cast send --private-key=$DEPLOYER_PRIVKEY --rpc-url localhost:1234/rpc/v1 $proxy 'addAllowance(address,uint256)' $evm_msig 10000000000000000000
