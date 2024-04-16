@@ -53,14 +53,12 @@ curl localhost:8081/allocators | jq
 
 ## Smart Contract Allocator
 
-Out of the box there's one Allocator contracts deployed, owned by `0x50c4c4551974c248e8e1c64060c8a3342fdb22d6` (privkey `0x26757a7491f72e1dd8becdc611a87db2f30f0c084155ed9e57ef6737a2026101`) under address `0x640bD4be149f40714D95aBcD414338bc7CfF39a3`, a.k.a. `t410fmqf5jpqut5ahctmvvpgucqzyxr6p6ond6pqephq`, used for Msig Contract Allocator
+Out of the box there's one Allocator contract deployed, owned by `0x50c4c4551974c248e8e1c64060c8a3342fdb22d6` (privkey `0x26757a7491f72e1dd8becdc611a87db2f30f0c084155ed9e57ef6737a2026101`) under address `0x640bD4be149f40714D95aBcD414338bc7CfF39a3`, a.k.a. `t410fmqf5jpqut5ahctmvvpgucqzyxr6p6ond6pqephq`, used for Msig Contract Allocator
   * msig `t2xdirjkq5p6mwqsfvwsyjytkazpvdlvo3snb7pwi` has allowance granted out of the box, with following signers:
     * `t17dx5t567wz5ues2cjkh5mor36nwxysnd5dugpey`
     * `t1roygqfjkssnfhz3xtfglikg4olckyjrl5ftlqmi`
     * `t1sqwwp3q537tgztr6maqjabhqyouu7uoycmsts7i`
     * `t1cbfxphkqhworbuugpkrhayxo2dumf5zjjyy677y`
-
-Both are also already made notaries on-chain.
 
 ## Tools
 
