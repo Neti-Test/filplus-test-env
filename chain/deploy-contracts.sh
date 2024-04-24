@@ -27,6 +27,8 @@ init=$(cast calldata 'initialize(address)' $DEPLOYER_EVM)
 allocator=$(forge create --rpc-url http://localhost:1234/rpc/v1 --private-key=$DEPLOYER_PRIVKEY Allocator | tee | grep 'Deployed to:' | awk '{ print $3; }')
 proxy=$(forge create --rpc-url http://localhost:1234/rpc/v1 --private-key=$DEPLOYER_PRIVKEY ERC1967Proxy --constructor-args $allocator $init | tee | grep 'Deployed to:' | awk '{ print $3; }')
 echo $proxy >> deployed-contracts.txt
+factory=$(forge create --rpc-url http://localhost:1234/rpc/v1 --private-key=$DEPLOYER_PRIVKEY Factory --constructor-args $DEPLOYER_EVM $allocator | tee | grep 'Deployed to:' | awk '{ print $3; }')
+echo $factory >> deployed-factory.txt
 
 # setup initial allowance for msig
 cd /lotus
@@ -44,7 +46,8 @@ done
 proxy=$(./lotus evm stat $proxy | tee | grep 'Filecoin address' | awk '{ print $NF }')
 ./lotus send $proxy 10000
 ./lotus-shed verifreg add-verifier t0100 $proxy 1000000000000
-id=$(./lotus msig inspect f080 | tail -1 | awk '{ print $1; }')
+sleep 3
+id=$(./lotus msig inspect f080 | tee | tail -1 | awk '{ print $1; }')
 ./lotus msig approve --from=t0101 f080 $id
 
 kill $MINER_PID

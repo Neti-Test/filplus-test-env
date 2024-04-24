@@ -60,6 +60,8 @@ Out of the box there's one Allocator contract deployed, owned by `0x50c4c4551974
     * `t1sqwwp3q537tgztr6maqjabhqyouu7uoycmsts7i`
     * `t1cbfxphkqhworbuugpkrhayxo2dumf5zjjyy677y`
 
+There's also Factory contract deployed under address `0xb49f2FA2026373353f6DD033d5132e1Eabe94843`. Predeployed allocator contract isn't registered in it.
+
 ## Tools
 
 ```
