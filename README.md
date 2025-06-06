@@ -13,6 +13,7 @@ Make sure you have installed:
 * [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/)
 * git, [jq](https://jqlang.org/) - should be available in your distro repos, try `apt install git jq`
 * [Foundry](https://getfoundry.sh/)
+* Node.js and npm (recommended version 22, but should work on any 18+)
 
 ```bash
 git submodule update --init --recursive

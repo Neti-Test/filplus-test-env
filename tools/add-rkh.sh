@@ -8,7 +8,7 @@ cd "$(dirname "$0")"
 
 rkh="$1"
 ./lotus.sh send "$rkh" 10000
-sleep 5
+sleep 10
 ./lotus.sh msig add-propose --from=t0100 f080 "$rkh"
 ./approve-latest.sh f080
 ./lotus.sh msig inspect f080
