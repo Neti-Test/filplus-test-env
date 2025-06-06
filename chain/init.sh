@@ -37,15 +37,15 @@ MINER_PID=$!
 echo $RK_priv_1 | ./lotus wallet import
 echo $RK_priv_2 | ./lotus wallet import
 for verifier_key in $VERIFIERS_PRIVKEYS; do
-    echo $verifier_key | ./lotus wallet import
+  echo $verifier_key | ./lotus wallet import
 done
 
 # make verifiers
 for verifier in $VERIFIERS; do
-    ./lotus send $verifier 10000
-    ./lotus-shed verifreg add-verifier $RK_addr_1 $verifier 1000000000
-    id=$(./lotus msig inspect f080 | tail -1 | awk '{ print $1; }')
-    ./lotus msig approve --from=$RK_addr_2 f080 $id
+  ./lotus send $verifier 10000
+  ./lotus-shed verifreg add-verifier $RK_addr_1 $verifier 1000000000
+  id=$(./lotus msig inspect f080 | tail -1 | awk '{ print $1; }')
+  ./lotus msig approve --from=$RK_addr_2 f080 $id
 done
 
 kill $MINER_PID
@@ -54,4 +54,6 @@ kill $DAEMON_PID
 wait
 
 sed -i 's/#EnableEthRPC = .*/EnableEthRPC = true/' $LOTUS_PATH/config.toml
+sed -i 's/#EnableIndexer = .*/EnableIndexer = true/' $LOTUS_PATH/config.toml
 sed -i 's|#ListenAddress = .*|ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"|' $LOTUS_PATH/config.toml
+

@@ -1,3 +1,6 @@
 [submodule "chain/filplus-allocator-contracts"]
 	path = chain/filplus-allocator-contracts
 	url = git@github.com:kacperzuk-neti/filplus-allocator-contracts.git
+[submodule "safe-smart-account"]
+	path = safe-smart-account
+	url = https://github.com/safe-global/safe-smart-account.git
