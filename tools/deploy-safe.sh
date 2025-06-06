@@ -23,7 +23,7 @@ npx hardhat --network custom deploy
 sleep 5
 
 SAFE_PROXY_FACTORY=0x74D5c85508Ba50Da9E144d0481D9b25Cfe2D787c
-SAFE=0xf92754b49E93C0ED61cb6f89F14c7D3f6474ED2d
+SAFEL2=0xD26054149a868f9e948D5bC9804fC12B24Aaf7cb
 FALLBACK_HANDLER=0xA3E0C3bF686F95828fc90064b9f3872e1ED63162
 initdata=$(cast calldata 'setup(address[] owners,uint256 threshold,address to,bytes data,address fallback_handler,address payment_token,uint256 payment,address payment_receiver)' \
   [$1] \
@@ -39,7 +39,7 @@ addr=0x"$(cast send \
   --rpc-url $NODE_URL --private-key $DEPLOYER_PRIVKEY \
   $SAFE_PROXY_FACTORY \
   'createProxyWithNonce(address,bytes,uint256)' \
-  $SAFE \
+  $SAFEL2 \
   $initdata \
   $(date +%s) |
   grep logs | grep -v Bloom | awk '{ print $2 }' | jq -r .[1].topics[1] | tail -c 41)"
