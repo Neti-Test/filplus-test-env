@@ -24,19 +24,25 @@ docker compose up -d
 Use `add-rkh.sh` script to add your wallet(s) as RKHs:
 
 ```bash
-./tools/add-rkh.sh signerAddress
+./tools/add-rkh.sh fvmSignerAddress
 ```
 
 Use `deploy-safe.sh` script to deploy a Safe account that can be used as a Metaallocator owner:
 
 ```bash
-./tools/deploy-safe.sh signerAddress
+./tools/deploy-safe.sh evmSignerAddress
 ```
 
 Use `deploy-metaallocator-with-datacap.sh` script to deploy a new Metaallocator:
 
 ```bash
-./tools/deploy-metaallocator-with-datacap.sh ownerAddress
+./tools/deploy-metaallocator-with-datacap.sh fvmOwnerAddress
+
+
+Tip: use `lotus evm stat` to convert between FVM/EVM addresses:
+
+```bash
+./tools/lotus.sh evm stat anyAddress
 ```
 
 ### Allocator.tech specific steps
@@ -49,7 +55,7 @@ First configure it:
 Run it:
 
 ```bash
-docker compose up --profile allocator-tech -d
+docker compose --profile allocator-tech up -d
 
 ```
 
@@ -70,7 +76,7 @@ where ISSUE_NUMBER is a fresh issue from [bookkeeping repo](https://github.com/N
 ## Recreate from scratch
 
 ```bash
-docker compose down -v && docker compose up -d
+docker compose --profile "*" down -v && docker compose up -d
 ```
 
 ## Connecting to Lotus API

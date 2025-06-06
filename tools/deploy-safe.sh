@@ -10,7 +10,7 @@ if [ "$#" -lt 1 ]; then
 fi
 
 cd "$(dirname "$0")"/../safe-smart-account
-rm src/deploy/deploy_*.ts
+rm -f src/deploy/deploy_*.ts
 cp ../safe-smart-account-custom-deploy.ts src/deploy/deploy_all_custom.ts
 npm ci
 export PK=$DEPLOYER_PRIVKEY
