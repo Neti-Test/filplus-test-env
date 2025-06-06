@@ -1,7 +1,7 @@
 services:
   chain:
     build: ./chain
-  
+
   corsproxy:
     build: ./cors-proxy
     ports:
@@ -26,6 +26,8 @@ services:
     depends_on:
       - postgres
       - corsproxy
+    profiles:
+      - allocator-tech
 
   postgres:
     image: postgres:16
@@ -33,3 +35,5 @@ services:
       - POSTGRES_PASSWORD=mysecretpassword
     volumes:
       - ./backend/dbinit:/docker-entrypoint-initdb.d
+    profiles:
+      - allocator-tech

@@ -21,7 +21,7 @@ metaallocator_evm=$(./tools/contract-metaallocator-cli.sh list-contracts $factor
 # make the contract a verifier
 metaallocator=$(./tools/lotus.sh evm stat $metaallocator_evm | tee | grep 'Filecoin address' | awk '{ print $NF }')
 ./tools/lotus.sh send $metaallocator 10000
-./tools/lotus-shed.sh verifreg add-verifier t0100 $metaallocator 1000000000000
+./tools/lotus-shed.sh verifreg add-verifier t0100 $metaallocator 112589990684262400
 sleep 5
 id=$(./tools/lotus.sh msig inspect f080 | tee | tail -1 | awk '{ print $1; }')
 ./tools/lotus.sh msig approve --from=t0101 f080 $id
