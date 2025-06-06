@@ -38,7 +38,7 @@ Use `deploy-metaallocator-with-datacap.sh` script to deploy a new Metaallocator:
 
 ```bash
 ./tools/deploy-metaallocator-with-datacap.sh fvmOwnerAddress
-
+```
 
 Tip: use `lotus evm stat` to convert between FVM/EVM addresses:
 
