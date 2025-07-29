@@ -37,7 +37,7 @@ Use `deploy-safe.sh` script to deploy a Safe account that can be used as a Metaa
 Use `deploy-metaallocator-with-datacap.sh` script to deploy a new Metaallocator:
 
 ```bash
-./tools/deploy-metaallocator-with-datacap.sh fvmOwnerAddress
+./tools/deploy-metaallocator-with-datacap.sh evmOwnerAddress
 ```
 
 Tip: use `lotus evm stat` to convert between FVM/EVM addresses:
