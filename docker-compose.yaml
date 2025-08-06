@@ -5,7 +5,7 @@ services:
   corsproxy:
     build: ./cors-proxy
     ports:
-      - 127.0.0.1:1234:80
+      - 1234:80
     depends_on:
       - chain
 
@@ -20,7 +20,7 @@ services:
       - GITHUB_APP_ID=$GITHUB_APP_ID
       - FILPLUS_ENV=$FILPLUS_ENV
     ports:
-      - 127.0.0.1:8081:8080
+      - 8081:8080
     volumes:
       - ./gh-private-key.pem:/backend/gh-private-key.pem
     depends_on:
