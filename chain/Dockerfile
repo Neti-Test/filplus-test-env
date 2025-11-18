@@ -13,7 +13,7 @@ RUN ln -s /usr/local/go/bin/go /usr/local/bin/
 ENV GOROOT=/usr/local/go
 
 # Lotus build
-RUN git clone https://github.com/filecoin-project/lotus /lotus -b v1.33.0
+RUN git clone https://github.com/filecoin-project/lotus /lotus -b v1.34.1
 WORKDIR /lotus
 RUN env CGO_CFLAGS_ALLOW="-D__BLST_PORTABLE__" CGO_CFLAGS="-D__BLST_PORTABLE__" make 2k && ./lotus fetch-params 2048
 
